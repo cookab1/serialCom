@@ -6,7 +6,6 @@
  */ 
 
 #include <avr/io.h>
-#include <util/delay.h>
 #include "EmSys.h"
 
 void sw_serial_putc(char c);
@@ -20,9 +19,6 @@ int main(void) {
 		test_sw_serial_putc();
 		_delay_ms(1000);
 	}
-	void sw_serial_putc(char c) {		
-		PORTB = 0x40;
-		
-	}
+	void sw_serial_putc(char c){ /* your code...*/}
 }
 
