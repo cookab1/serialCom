@@ -26,11 +26,15 @@ int main(void) {
 	
 	void sw_serial_putc(char c) {
 		//char d = c;
+		
+		for(int i) // finish loop
+		delay_usec(104);
 		PORTB = 0x40;
 		delay_usec(104);
+		PORTB |= 1 << 6; //set bit 6 to 0
 	}
 	
-	//PORTB &= ~(1 << 6);
-	//PORTB |= 1 << 6;
+	//PORTB &= ~(1 << 6); //set bit 6 to 1
+	//PORTB |= 1 << 6; //set bit 6 to 0
 }
 
