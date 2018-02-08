@@ -40,7 +40,12 @@ int main(void) {
 	}
 }
 void sw_serial_putc(char c){		
-		
+	/*
+	for(int i = 7; i >= 0; i--)
+	{
+		BITBANG((c & (1 << i)) == 0)	
+	}
+	*/
 		BITBANG(0);
 		BITBANG((c & 0x80) == 0);
 		BITBANG((c & 0x40) == 0);
