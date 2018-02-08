@@ -12,7 +12,7 @@
 #include <util/delay.h>
 
 void sw_serial_putc(char c);
-void delay_usec(unsigned int);
+//void delay_usec(unsigned int);
 
 void BITBANG(bool b) {
 	if (b) {
@@ -24,8 +24,8 @@ void BITBANG(bool b) {
 		PORTB = 0x0;
 	}
 	// replace with our delay
-	delay_usec()
-	//_delay_ms(1000);
+	//delay_usec()
+	_delay_ms(1000);
 }
 
 
