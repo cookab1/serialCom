@@ -8,15 +8,16 @@
 #include <avr/io.h>
 #include "EmSys.h"
 #include <stdbool.h>
+#include <util/delay.h>
 
 void BITBANG(bool b) {
 	if (b) {
 		// ON
-		PB6 &= ~PB6;
+		PORTB = 0x6;
 	}
 	else {
 		// OFF
-		PB6 |= PB6;
+		PORTB = 0x0;
 	}
 	// replace with our delay
 	_delay_ms(1000);
@@ -33,8 +34,8 @@ int main(void) {
 		test_sw_serial_putc();
 		_delay_ms(1000);
 	}
-	void sw_serial_putc(char c){
-		
+}
+void sw_serial_putc(char c){		
 		
 		BITBANG(0);
 		BITBANG((c & 0x80) == 0);
@@ -46,5 +47,4 @@ int main(void) {
 		BITBANG((c & 0x2) == 0);
 		BITBANG((c & 0x1) == 0);
 		BITBANG((1));
-	}
 }
