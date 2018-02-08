@@ -1,3 +1,4 @@
+
 /*
  * Project3.c
  *
@@ -13,14 +14,15 @@
 void BITBANG(bool b) {
 	if (b) {
 		// ON
-		PORTB = 0x6;
+		PORTB = 0x40;
 	}
 	else {
 		// OFF
 		PORTB = 0x0;
 	}
 	// replace with our delay
-	_delay_ms(1000);
+	
+	//_delay_ms(1000);
 }
 
 void sw_serial_putc(char c);
