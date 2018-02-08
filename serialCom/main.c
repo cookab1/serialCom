@@ -14,7 +14,7 @@
 void BITBANG(bool b) {
 	if (b) {
 		// ON
-		PORTB = 0x6;
+		PORTB = 0x40;
 	}
 	else {
 		// OFF
