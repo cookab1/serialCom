@@ -7,6 +7,20 @@
 
 #include <avr/io.h>
 #include "EmSys.h"
+#include <stdbool.h>
+
+void BITBANG(bool b) {
+	if (b) {
+		// ON
+		PB6 &= ~PB6;
+	}
+	else {
+		// OFF
+		PB6 |= PB6;
+	}
+	// replace with our delay
+	_delay_ms(1000);
+}
 
 void sw_serial_putc(char c);
 
@@ -19,6 +33,18 @@ int main(void) {
 		test_sw_serial_putc();
 		_delay_ms(1000);
 	}
-	void sw_serial_putc(char c){ /* your code...*/}
+	void sw_serial_putc(char c){
+		
+		
+		BITBANG(0);
+		BITBANG((c & 0x80) == 0);
+		BITBANG((c & 0x40) == 0);
+		BITBANG((c & 0x20) == 0);
+		BITBANG((c & 0x10) == 0);
+		BITBANG((c & 0x8) == 0);
+		BITBANG((c & 0x4) == 0);
+		BITBANG((c & 0x2) == 0);
+		BITBANG((c & 0x1) == 0);
+		BITBANG((1));
+	}
 }
-
