@@ -1,3 +1,4 @@
+
 /*
  * Project3.c
  *
@@ -6,35 +7,45 @@
  */ 
 
 #include <avr/io.h>
-#include <util/delay.h>
 #include "EmSys.h"
+#include <stdbool.h>
+#include <util/delay.h>
 
+void BITBANG(bool b) {
+	if (b) {
+		// ON
+		PORTB = 0x6;
+	}
+	else {
+		// OFF
+		PORTB = 0x0;
+	}
+	// replace with our delay
+	_delay_ms(1000);
+}
 
-void delay_usec(unsigned int);
 void sw_serial_putc(char c);
 
 int main(void) {
 	// init PORTB so that bit 6 (digital pin 12) is set for OUTPUT
 	DDRB |= (1 << PB6);  // Remember that this is the DATA DIRECTION register--use PORTB to set/clear bit 6 output
 	init_sw_serial_putc_test(9600,SERIAL_8N1);
-	
 	while(1) {
 		sw_serial_putc('U');
 		test_sw_serial_putc();
 		_delay_ms(1000);
 	}
-	
-	void sw_serial_putc(char c) {
-		//char d = c;
-		
-		for(int i) // finish loop
-		delay_usec(104);
-		PORTB = 0x40;
-		delay_usec(104);
-		PORTB |= 1 << 6; //set bit 6 to 0
-	}
-	
-	//PORTB &= ~(1 << 6); //set bit 6 to 1
-	//PORTB |= 1 << 6; //set bit 6 to 0
 }
-
+void sw_serial_putc(char c){		
+		
+		BITBANG(0);
+		BITBANG((c & 0x80) == 0);
+		BITBANG((c & 0x40) == 0);
+		BITBANG((c & 0x20) == 0);
+		BITBANG((c & 0x10) == 0);
+		BITBANG((c & 0x8) == 0);
+		BITBANG((c & 0x4) == 0);
+		BITBANG((c & 0x2) == 0);
+		BITBANG((c & 0x1) == 0);
+		BITBANG((1));
+}
