@@ -12,20 +12,20 @@
 #include <util/delay.h>
 
 void sw_serial_putc(char c);
-//void delay_usec(unsigned int);
+void delay_usec(unsigned int);
 
 void BITBANG(bool b) {
 	if (b) {
 		// ON
-		PORTB = 0x40;
+		PORTB |= 0x40;
 	}
 	else {
 		// OFF
-		PORTB = 0x0;
+		PORTB &= ~0x40;
 	}
 	// replace with our delay
-	//delay_usec()
-	_delay_ms(1000);
+	delay_usec(104);
+	//_delay_ms(1000);
 }
 
 
@@ -40,12 +40,14 @@ int main(void) {
 	}
 }
 void sw_serial_putc(char c){		
-	/*
-	for(int i = 7; i >= 0; i--)
-	{
-		BITBANG((c & (1 << i)) == 0)	
+	
+	BITBANG(0);
+	for(int i = 0; i < 8; i++) {
+		BITBANG(c & 1);
+		c >>= 1;
 	}
-	*/
+	BITBANG(1);
+	/*
 		BITBANG(0);
 		BITBANG((c & 0x80) == 0);
 		BITBANG((c & 0x40) == 0);
@@ -56,4 +58,5 @@ void sw_serial_putc(char c){
 		BITBANG((c & 0x2) == 0);
 		BITBANG((c & 0x1) == 0);
 		BITBANG((1));
+	*/
 }
