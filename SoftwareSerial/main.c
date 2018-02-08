@@ -11,6 +11,9 @@
 #include <stdbool.h>
 #include <util/delay.h>
 
+void sw_serial_putc(char c);
+void delay_usec(unsigned int);
+
 void BITBANG(bool b) {
 	if (b) {
 		// ON
@@ -21,11 +24,10 @@ void BITBANG(bool b) {
 		PORTB = 0x0;
 	}
 	// replace with our delay
-	
+	delay_usec()
 	//_delay_ms(1000);
 }
 
-void sw_serial_putc(char c);
 
 int main(void) {
 	// init PORTB so that bit 6 (digital pin 12) is set for OUTPUT
