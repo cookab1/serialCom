@@ -16,8 +16,8 @@ delay_usec:
 		//nop			// 1
 		rcall L2	// 4 cycles
 		//brge L1		// 0 ? 1 : 2 useless
-L1:		breq L2		// 0 ? 1 : 2
-		dec r24		// 1 cycle
+		breq L2		// 0 ? 1 : 2
+L1:		dec r24		// 1 cycle
 		rcall L2	// 4 cycles
 		nop			// 1
 		nop			// 1
