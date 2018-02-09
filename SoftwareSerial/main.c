@@ -23,9 +23,7 @@ void BITBANG(bool b) {
 		// OFF
 		PORTB &= ~0x40;
 	}
-	// replace with our delay
 	delay_usec(104);
-	//_delay_ms(1000);
 }
 
 
@@ -39,24 +37,12 @@ int main(void) {
 		_delay_ms(1000);
 	}
 }
-void sw_serial_putc(char c){		
-	
+void sw_serial_putc(char c){	
 	BITBANG(0);
 	for(int i = 0; i < 8; i++) {
 		BITBANG(c & 1);
 		c >>= 1;
 	}
 	BITBANG(1);
-	/*
-		BITBANG(0);
-		BITBANG((c & 0x80) == 0);
-		BITBANG((c & 0x40) == 0);
-		BITBANG((c & 0x20) == 0);
-		BITBANG((c & 0x10) == 0);
-		BITBANG((c & 0x8) == 0);
-		BITBANG((c & 0x4) == 0);
-		BITBANG((c & 0x2) == 0);
-		BITBANG((c & 0x1) == 0);
-		BITBANG((1));
-	*/
+	
 }

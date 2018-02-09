@@ -10,24 +10,29 @@
 		.global delay_usec
 
 delay_usec:
-		dec r24		// 1 cycle
-		brlt L3		// 0 ? 1 : 2 maybe L1
-		//nop			// 1
-		//nop			// 1
-		rcall L2	// 4 cycles
-		//brge L1		// 0 ? 1 : 2 useless
-		breq L2		// 0 ? 1 : 2
-L1:		dec r24		// 1 cycle
-		rcall L2	// 4 cycles
-		nop			// 1
-		nop			// 1
-		nop			// 1
-		nop			// 1
-		brge	L1	// 0 ? 1 : 2 
-L2:  	ret			// 5 cycles
-L3:		mov	r24, $65536 // 1
-		brge L1:
-
-// for 0 -- 
-// for 1 -- 1111/1111/1111/111
-// for 2 -- 
+		dec		r24		// 1 cycle
+		brlt	L3		//if false 1 cycle else 2
+		brge	L4		
+L1:		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+L4:		dec		r24		
+		nop			
+		nop			
+		nop
+		nop
+		nop
+		brge	L1	
+L2:  	ret				// 5 cycles
+L3:		adiw	r24, 33 // 1 cycle
+		lsl		r24
+		lsl		r24
+		lsl		r24
+		mul		r24, r24 // 2 cycles
+		dec		r24
+		brge	L1
