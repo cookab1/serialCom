@@ -1,0 +1,38 @@
+
+
+DDR11 = 0;
+
+//PIN11 is the recieving pin
+
+//When does it start
+//When does it stop
+//What does it do in the middle
+
+int frameParam;
+static int rxPin = 0x0; // what ever the recieve pin is
+static int txPin = 0x40;
+
+static long baud = 9600;
+static int bitTime = 104;
+
+void init_sw_serial(int rx_pin, int tx_pin, long baudrate, int framing);
+void sw_serial_puts(char *str);
+char sw_serial_getc(void);
+
+void switch(long baud) {
+	bitTime = (1 / baud) * 1000000;
+}
+
+
+char sw_serial_getc(void) {
+	char c;
+	int i;
+	start;//wait for the start bit before we start reading
+	for(i = 0; i < 8; i++) {
+		c |= rxPin;
+		c << 1;
+		delay_usec(bitTime);
+	}
+		
+	return c;
+}
