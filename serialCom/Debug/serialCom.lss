@@ -299,7 +299,6 @@ void sw_serial_putc(char c){
  184:	d1 f7       	brne	.-12     	; 0x17a <sw_serial_putc+0x10>
  186:	81 e0       	ldi	r24, 0x01	; 1
  188:	e7 df       	rcall	.-50     	; 0x158 <BITBANG>
-	
  18a:	df 91       	pop	r29
  18c:	cf 91       	pop	r28
  18e:	1f 91       	pop	r17

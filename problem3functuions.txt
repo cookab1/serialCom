@@ -2,7 +2,7 @@
 
 DDR11 = 0;
 
-//PIN11 is the recieving pin
+//PIN11 is the recieving pin I think
 
 //When does it start
 //When does it stop

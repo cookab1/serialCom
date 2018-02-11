@@ -44,5 +44,4 @@ void sw_serial_putc(char c){
 		c >>= 1;
 	}
 	BITBANG(1);
-	
 }
